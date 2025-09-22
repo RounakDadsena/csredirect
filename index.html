@@ -1,19 +1,29 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Redirecting...</title>
-    <script>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Redirecting to Cloudstream</title>
+  <script>
+    window.onload = function () {
       const params = new URLSearchParams(window.location.search);
-      const target = params.get("redirectto");
-      if (target) {
-        window.location.href = decodeURIComponent(target);
-      } else {
-        document.body.innerHTML = "Invalid redirect link.";
+      const redirectto = params.get("redirectto");
+
+      if (!redirectto) {
+        document.body.innerText = "Missing uri";
+        return;
       }
-    </script>
-  </head>
-  <body>
-    Redirecting...
-  </body>
+
+      try {
+        const decodedUri = decodeURIComponent(redirectto);
+        window.location.href = decodedUri;
+      } catch (e) {
+        document.body.innerText = "Error decoding Uri";
+        console.error(e);
+      }
+    };
+  </script>
+</head>
+<body>
+  Redirecting to Cloudstream...
+</body>
 </html>
